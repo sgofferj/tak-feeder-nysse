@@ -3,7 +3,7 @@ name = "tak-feeder-nysse"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Gemini CLI"}
+    {name = "Stefan Gofferje"}
 ]
 requires-python = ">=3.12,<4.0"
 dependencies = [
