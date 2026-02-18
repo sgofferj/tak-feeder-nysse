@@ -1,0 +1,3 @@
+"""
+Nysse TAK Feeder package.
+"""
