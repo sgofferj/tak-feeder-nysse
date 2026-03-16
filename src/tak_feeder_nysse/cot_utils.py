@@ -41,11 +41,12 @@ def generate_nysse_cot(
     track.set("speed", str(kwargs.get("speed", 0.0)))
 
     contact = ET.SubElement(detail, "contact")
-    contact.set("callsign", f"Nysse {vehicle_ref} ({line_ref})")
+    contact.set("callsign", f"NYSSE {line_ref}")
 
     remarks = ET.SubElement(detail, "remarks")
     remarks.text = (
-        f"{kwargs.get('dest_city', 'Unknown')} {kwargs.get('dest_name', 'Unknown')}\n"
+        f"Vehicle: {vehicle_ref}\n"
+        f"Dest: {kwargs.get('dest_city', 'Unknown')} {kwargs.get('dest_name', 'Unknown')}\n"
         f"Next stop: {kwargs.get('next_city', 'Unknown')} "
         f"{kwargs.get('next_stop_name', 'Unknown')} "
         f"{kwargs.get('next_stop_time', '--:--')}\n"

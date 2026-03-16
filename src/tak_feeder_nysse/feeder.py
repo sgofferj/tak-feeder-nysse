@@ -55,7 +55,7 @@ class NysseWorker(pytak.QueueWorker):  # type: ignore[misc]
                 url, headers=self.headers, timeout=timeout
             ) as response:
                 response.raise_for_status()
-                data = await response.json()
+                data = await response.json(content_type=None)
                 if data and isinstance(data.get("body"), list) and data["body"]:
                     stop_data = data["body"][0]
                     name = stop_data.get("name", "Unknown")
@@ -169,7 +169,7 @@ class NysseWorker(pytak.QueueWorker):  # type: ignore[misc]
                         url, headers=self.headers, timeout=timeout
                     ) as response:
                         response.raise_for_status()
-                        data = await response.json()
+                        data = await response.json(content_type=None)
 
                         if data and isinstance(data.get("body"), list):
                             self._logger.debug("Found %d vehicles", len(data["body"]))

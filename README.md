@@ -42,6 +42,11 @@ services:
       - UPDATE_INTERVAL=3
 ```
 
+## Implementation Details
+
+- **API Content-Type:** The Nysse API often returns `text/plain; charset=utf-8` even for JSON payloads. The feeder is configured to bypass strict `aiohttp` mimetype validation to handle this.
+- **Filtering:** Supports wildcard line filtering via the `NYSSE_LINE_FILTER` environment variable.
+
 ## License
 
 This project is licensed under the terms of the GNU General Public License v3.0. See [LICENSE.md](LICENSE.md) for details.
