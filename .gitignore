@@ -13,3 +13,5 @@ dist/
 build/
 *.egg-info/
 certs
+GEMINI.md
+TODO.md
