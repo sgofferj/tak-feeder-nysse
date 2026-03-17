@@ -5,6 +5,8 @@ Nysse Vehicle Activity Worker module.
 import asyncio
 import fnmatch
 from typing import Dict, Any, Optional
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import pytak
 import aiohttp
@@ -113,8 +115,15 @@ class NysseWorker(pytak.QueueWorker):  # type: ignore[misc]
                 ns_name, ns_city = s_info["name"], s_info["city"]
 
             exp_dep = next_call.get("expectedDepartureTime")
-            if exp_dep and "T" in exp_dep:
-                ns_time = exp_dep.split("T")[1][:5]
+            if exp_dep:
+                try:
+                    # API format: 2026-03-16T11:57:33Z
+                    dt_utc = datetime.fromisoformat(exp_dep.replace("Z", "+00:00"))
+                    dt_fi = dt_utc.astimezone(ZoneInfo("Europe/Helsinki"))
+                    ns_time = dt_fi.strftime("%H:%M")
+                except (ValueError, TypeError):
+                    if "T" in exp_dep:
+                        ns_time = exp_dep.split("T")[1][:5]
 
         # Get destination info
         d_name, d_city = "Unknown", "Unknown"
