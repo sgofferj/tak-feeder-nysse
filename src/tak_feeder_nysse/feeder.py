@@ -20,7 +20,7 @@ class NysseWorker(pytak.QueueWorker):  # type: ignore[misc]
 
     def __init__(self, queue: asyncio.Queue[bytes], config: Dict[str, Any]) -> None:
         super().__init__(queue, config)
-        self.line_ref = config.get("NYSSE_LINE_REF", "60,60U,64,65,65A,66,67")
+        self.line_ref = config.get("NYSSE_LINE_FILTER", "60,60U,64,65,65A,66,67")
         self.poll_interval = int(config.get("UPDATE_INTERVAL", "3"))
         self.stop_cache: Dict[str, Dict[str, str]] = {}
         self.api_url = "https://data.itsfactory.fi/journeys/api/1"
